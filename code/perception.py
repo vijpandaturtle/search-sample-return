@@ -113,14 +113,30 @@ def perception_step(Rover):
     obstacles_threshold = color_thresh(warped_image, rgb_thresh=(20,20,20))
     yellow_rock_samples_threshold = color_thresh(warped_image, rgb_thresh=(50,50,50))
     
-    Rover.vision_image[:,:,0] = navigable_terrain_threshold
-    Rover.vision_image[:,:,1] = obstacles_threshold
-    Rover.vision_image[:,:,2] = yellow_rock_samples_threshold
+    Rover.vision_image[:,:,0] = obstacles_threshold
+    Rover.vision_image[:,:,1] = yellow_rock_samples_threshold
+    Rover.vision_image[:,:,2] = navigable_terrain_threshold
     
+    Rover.pos[0] = xpos
+    Rover.pos[1] = ypos
+    Rover.yaw = yaw
+    world_size = 200
+    scale = 10
     # Coverting map pixel values to rover centric co-ordinates
-    x_rover_centric, y_rover_centric = rover_coords(navigable_terrain_threshold)
+    terrain_x, terrain_y = rover_coords(navigable_terrain_threshold)
+    obstacles_x, obstacles_y = rover_coords(obstacles_threshold)
+    rock_samples_x, rock_samples_y = rover_coords(yellow_rock_samples_threshold)
     # Convert rover-centric cor-ordinates to world co-ordinates
-    x_pos_world, y_pos_world = pix_to_world(x_rover_centric, y_rover_centric,)
+    terrain_x_world, terrain_y_world = pix_to_world(terrain_x, terrain_y, xpos, ypos, yaw, world_size, scale)
+    obstacles_x_world, obstacles_y_world = pix_to_world(obstacles_x, obstacles_y, xpos, ypos, yaw, world_size, scale)
+    rock_samples_x_world, rock_samples_y_world = pix_to_world(rock_samples_x, rock_samples_y, xpos, ypos, yaw, world_size, scale)
+    
+    # Now, update the rover world map
+    Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
+    Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
+    Rover.worldmap[navigable_y_world, navigable_x_world, 2] += 1
+
+    
     
     
     return Rover
