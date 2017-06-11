@@ -109,6 +109,8 @@ def perception_step(Rover):
     # Update Rover pixel distances and angles
         # Rover.nav_dists = rover_centric_pixel_distances
         # Rover.nav_angles = rover_centric_angles
+    dst_size = 5
+    bottom_offset = 6
     image = Rover.img
     source = np.array([[14, 140],[301, 140],[200, 96],[118, 96]])
     destination = np.array([[image.shape[1]/2 - dst_size, image.shape[0] - bottom_offset],
