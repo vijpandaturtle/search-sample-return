@@ -50,8 +50,12 @@ def decision_step(Rover):
                     # Release the brake to allow turning
                     Rover.brake = 0
                     # Turn range is +/- 15 degrees, when stopped the next line will induce 4-wheel turning
-                    Rover.steer = -15 # Could be more clever here about which way to turn
-                # If we're stopped but see sufficient navigable terrain in front then go!
+                    Rover.steer = -10 # Could be more clever here about which way to turn
+                    Rover.brake = 0
+                    Rover.steer = 0
+                    Rover.vel = 1
+                    Rover.throttle = 1.0
+                 # If we're stopped but see sufficient navigable terrain in front then go!
                 if len(Rover.nav_angles) >= Rover.go_forward:
                     # Set throttle back to stored value
                     Rover.throttle = Rover.throttle_set
@@ -64,8 +68,8 @@ def decision_step(Rover):
     # even if no modifications have been made to the code
     else:
         Rover.throttle = Rover.throttle_set
-        Rover.steer = 0
-        Rover.brake = 0
+        Rover.steer = 10
+        Rover.brake = 0.2
         
     # If in a state where want to pickup a rock send pickup command
     if Rover.near_sample and Rover.vel == 0 and not Rover.picking_up:

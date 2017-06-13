@@ -112,8 +112,8 @@ def perception_step(Rover):
     dst_size = 5
     bottom_offset = 6
     image = Rover.img
-    source = np.array([[14, 140],[301, 140],[200, 96],[118, 96]])
-    destination = np.array([[image.shape[1]/2 - dst_size, image.shape[0] - bottom_offset],
+    source = np.float32([[14, 140],[301, 140],[200, 96],[118, 96]])
+    destination = np.float32([[image.shape[1]/2 - dst_size, image.shape[0] - bottom_offset],
                   [image.shape[1]/2 + dst_size, image.shape[0] - bottom_offset],
                   [image.shape[1]/2 + dst_size, image.shape[0] - 2*dst_size - bottom_offset], 
                   [image.shape[1]/2 - dst_size, image.shape[0] - 2*dst_size - bottom_offset]])
@@ -121,7 +121,7 @@ def perception_step(Rover):
     warped_image = perspect_transform(image, source, destination)
     navigable_terrain_threshold = color_thresh(warped_image)
     obstacles_threshold = color_thresh_other(warped_image)
-    yellow_rock_samples_threshold = color_thresh_other(warped, (100, 50, 50), (0, 0, 0))
+    yellow_rock_samples_threshold = color_thresh_other(warped_image, (100, 50, 50), (0, 0, 0))
     
     Rover.vision_image[:,:,0] = obstacles_threshold
     Rover.vision_image[:,:,1] = yellow_rock_samples_threshold
@@ -147,16 +147,11 @@ def perception_step(Rover):
     Rover.worldmap[terrain_y_world, terrain_x_world, 2] = 255
     
     # Converting rover centric pixel coordinates to polar coordinates
-    polar_coords = [to_polar_coords(terrain_x, terrain_y), to_polar_coords(obstacles_x, obstacles_y),
-                    to_polar_coords(rock_samples_x, rock_samples_y)]
-    rover_centric_pixel_distances = []
-    rover_centric_angles = []
-    for coords in polar_coords:
-        for dist,angle in coords:
-            rover_centric_pixel_distances.append(dist)
-            rover_centric_angles.append(angle)
+    nav1, dist1 = to_polar_coords(terrain_x, terrain_y)
+    nav2, dist2 = to_polar_coords(obstacles_x, obstacles_y)
+    nav3, dist3 = to_polar_coords(rock_samples_x, rock_samples_y)
     
-    Rover.nav_dists = rover_centric_pixel_distances
-    Rover.nav_angles = rover_centric_angles
-
+    Rover.nav_dists = [nav1, nav2, nav3]
+    Rover.nav_angles = [dist1, dist2, dist3]
+    
     return Rover
