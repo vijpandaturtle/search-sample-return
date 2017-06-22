@@ -56,18 +56,20 @@ Also, the perception_step() function, I changed the following commands to
  ```
  from
  ```python
-  Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] +=1
+  Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] += 1
+  Rover.worldmap[rock_y_world, rock_x_world, 1] += 1
+  Rover.worldmap[terrain_y_world, terrain_x_world, 2] += 1
  ```
 for visiblity purposes.
 
-That's all for perception_step(). Below I have listed the changes I made in decision_step() function. But first I would like to give a brief over view of the Rover when I ran it after coding the perception.py without any changes to the decision making logic.
+That's all for perception_step(). In the decision_step() function, I introduced a new instance variable of the Rover class called stop_time. This variable
+was introduced to prevent the rover from turning continously, which means it will decide the actuation of the rover when it is in go_forward mode.
 
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
 
 

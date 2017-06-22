@@ -4,7 +4,7 @@ import numpy as np
 # This is where you can build a decision tree for determining throttle, brake and steer 
 # commands based on the output of the perception_step() function
 def decision_step(Rover):
-    print(Rover.nav_angles)
+    # print(Rover.nav_angles)
     # Implement conditionals to decide what to do given perception data
     # Here you're all set up with some basic functionality but you'll need to
     # improve on this decision tree to do a good job of navigating autonomously!
@@ -21,7 +21,7 @@ def decision_step(Rover):
             # Check the extent of navigable terrain
             if len(Rover.nav_angles) >= Rover.stop_forward:
                 if Rover.vel < 0.2 and Rover.stop_time % 50 == 0:
-                    print(Rover.stop_time)
+                    #print(Rover.stop_time)
                     Rover.throttle = 0 
                     Rover.brake = 0 
                     Rover.steer = -15
