@@ -1,6 +1,4 @@
 ## Project: Search and Sample Return
----
-
 
 **The goals / steps of this project are the following:**  
 
@@ -42,12 +40,27 @@ I addressed the point as per the instructions given for the notebook. As far as 
 ![alt text][image1]
 
 #### 1. Populate the `process_image()` function with the appropriate analysis steps to map pixels identifying navigable terrain, obstacles and rock samples into a worldmap.  Run `process_image()` on your test data using the `moviepy` functions provided to create video output of your result.
-And another!
+I followed the steps given in the notebook to complete the process_image() function. I also used the existing and new functions I implemented for color thresholding. Finally I ran the same function on new testing data.
 
 ![alt text][image2]
 ### Autonomous Navigation and Mapping
 
 #### 1. Fill in the `perception_step()` (at the bottom of the `perception.py` script) and `decision_step()` (in `decision.py`) functions in the autonomous mapping scripts and an explanation is provided in the writeup of how and why these functions were modified as they were.
+The code used in perception_step() is not very different from the code I implemented in process_image() in the jupyter notebook, with the exception of the rover update step. In the jupyter notebook I simply updated the state of data stored in a csv file, whereas here I updated the variable states of the class Rover that maintains all states and parameters that are essential for the rover to function.
+Also, the perception_step() function, I changed the following commands to
+
+```python
+ Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] = 255
+ Rover.worldmap[rock_y_world, rock_x_world, 1] = 255
+ Rover.worldmap[terrain_y_world, terrain_x_world, 2] = 255
+ ```
+ from
+ ```python
+  Rover.worldmap[obstacle_y_world, obstacle_x_world, 0] +=1
+ ```
+for visiblity purposes.
+
+That's all for perception_step(). Below I have listed the changes I made in decision_step() function. But first I would like to give a brief over view of the Rover when I ran it after coding the perception.py without any changes to the decision making logic.
 
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
