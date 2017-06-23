@@ -68,7 +68,7 @@ was introduced to prevent the rover from turning continously, which means it wil
 
 #### 2. Launching in autonomous mode your rover can navigate and map autonomously.  Explain your results and how you might improve them in your writeup.  
 
-**Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
+**Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launhe problem ch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
 When I launched my Rover simulator and set it to autonomous mode, I observed the following results. The rover is mapping more than 40% of the environment,
 but with limited accuracy level that is limited fidelity. The rover also gets stuck sometimes, after which it turns on its own or with user input from the manual mode. 
