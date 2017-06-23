@@ -20,7 +20,9 @@
 
 [image1]: ./misc/rover_image.jpg
 [image2]: ./calibration_images/example_grid1.jpg
-[image3]: ./calibration_images/example_rock1.jpg
+[image3]: Test_Run1.png
+[image4]: Test_Run2.png
+[image5]: Test_Run3.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -71,6 +73,15 @@ was introduced to prevent the rover from turning continously, which means it wil
 **Note: running the simulator with different choices of resolution and graphics quality may produce different results, particularly on different machines!  Make a note of your simulator settings (resolution and graphics quality set on launhe problem ch) and frames per second (FPS output to terminal by `drive_rover.py`) in your writeup when you submit the project so your reviewer can reproduce your results.**
 
 When I launched my Rover simulator and set it to autonomous mode, I observed the following results. The rover is mapping more than 40% of the environment,
-but with limited accuracy level that is limited fidelity. The rover also gets stuck sometimes, after which it turns on its own or with user input from the manual mode. 
+but with limited accuracy level that is limited fidelity. The stats of Rover after three test runs is as follows :
+Display Setting for simulator : 1024 x 768
+Graphics Quality : Good
 
+Test Run 1:
 ![alt text][image3]
+Test Run 2:
+![alt text][image4]
+Test Run 3:
+![alt text][image5]
+
+From the results of the above three test runs, you can see that the behaviour of the car is rather unpredictable. At certain arbitrary points of time, it gets stuck or keeps moving around the same place in circles and sometimes requires user input (switched to manual mode) to move smoothly. My belief is that the cause for this lies in the decision making logic of the Rover. So, I would focus on improving the decion_step() function in order to improve the performance of the rover.
