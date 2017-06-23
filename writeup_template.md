@@ -74,6 +74,7 @@ was introduced to prevent the rover from turning continously, which means it wil
 
 When I launched my Rover simulator and set it to autonomous mode, I observed the following results. The rover is mapping more than 40% of the environment,
 but with limited accuracy level that is limited fidelity. The stats of Rover after three test runs is as follows :
+
 Display Setting for simulator : 1024 x 768
 Graphics Quality : Good
 
